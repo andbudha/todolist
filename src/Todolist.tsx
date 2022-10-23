@@ -1,6 +1,8 @@
 import React from "react";
+import {FilterValueType} from "./App";
 
-type TaskType = {
+
+export type TaskType = {
     id: number
     title: string
     isDone: boolean
@@ -10,7 +12,7 @@ type PropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (taskID: number)=> void
-    filterTasks: (filteredTasks: string)=> void
+    filterTasks: (filteredTasks: FilterValueType)=> void
 }
 
 export function Todolist(props: PropsType) {
