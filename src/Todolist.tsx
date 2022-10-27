@@ -24,7 +24,7 @@ export function Todolist(props: PropsType) {
         setInputValue(event.currentTarget.value);
     }
     //onkeydown input-value-passing function
-    const onKeyDownHandler = (input: KeyboardEvent<HTMLInputElement>) => {
+    const addTaskOnKeyDownHandler = (input: KeyboardEvent<HTMLInputElement>) => {
         if(input.key === 'Enter'){
             props.addTask(inputValue);
             setInputValue('');
@@ -32,9 +32,14 @@ export function Todolist(props: PropsType) {
     }
 
     //onclick input-value-passing function
-    const onClickButtonHandler = () => {
+    const addTaskOnClickHandler = () => {
         props.addTask(inputValue);
         setInputValue('');
+    }
+
+    //onclick task filtering
+    const filterTaskOnClickHandler = (buttonName: FilterValueType) => {
+        props.filterTasks(buttonName);
     }
 
     return (
@@ -45,9 +50,9 @@ export function Todolist(props: PropsType) {
                     <input
                         value={inputValue}
                         onChange={onChangeInputHandler}
-                        onKeyDown={onKeyDownHandler}
+                        onKeyDown={addTaskOnKeyDownHandler}
                     />
-                    <button onClick={onClickButtonHandler}>+</button>
+                    <button onClick={addTaskOnClickHandler}>+</button>
                 </div>
                 <ul>
                     {props.tasks.map((element)=>{
@@ -61,9 +66,9 @@ export function Todolist(props: PropsType) {
                     })}
                 </ul>
                 <div>
-                    <button onClick={()=>{props.filterTasks('All')}}>All</button>
-                    <button onClick={()=>{props.filterTasks('Active')}}>Active</button>
-                    <button onClick={()=>{props.filterTasks('Completed')}}>Completed</button>
+                    <button onClick={()=>filterTaskOnClickHandler('All')}>All</button>
+                    <button onClick={()=>filterTaskOnClickHandler('Active')}>Active</button>
+                    <button onClick={()=>filterTaskOnClickHandler('Completed')}>Completed</button>
                 </div>
             </div>
         </div>
