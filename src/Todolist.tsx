@@ -43,8 +43,8 @@ export function Todolist(props: PropsType) {
     }
 
     //onclick task removing
-    const taskRemoveOnClickHandler = (taskID: string) => {
-        props.removeTask(taskID);
+    const taskRemoveOnClickHandler = (elementID: string) => {
+        props.removeTask(elementID);
     }
 
     return (
