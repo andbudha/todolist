@@ -1,6 +1,7 @@
 import React, {KeyboardEvent,ChangeEvent, useState} from "react";
 import {FilterValueType} from "./App";
 import {Button} from "./components/Button";
+import classes from "./Todolist.module.css";
 
 
 export type TaskType = {
@@ -19,7 +20,10 @@ type TodoListPropsType = {
 }
 
 export function Todolist(props: TodoListPropsType) {
-    let[inputValue, setInputValue]=useState('');
+    //input states
+    const[inputValue, setInputValue]=useState('');
+    const[error, setError]=useState<string|null>(null);
+
 
     //input-value-catching function
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +31,7 @@ export function Todolist(props: TodoListPropsType) {
     }
     //onkeydown input-value-passing function
     const addTaskOnKeyDownHandler = (input: KeyboardEvent<HTMLInputElement>) => {
+       setError(null)
         if(input.key === 'Enter'){
             props.addTask(inputValue);
             setInputValue('');
@@ -38,6 +43,8 @@ export function Todolist(props: TodoListPropsType) {
         if(inputValue.trim() !== ''){
             props.addTask(inputValue.trim());
             setInputValue('');
+        } else {
+            setError('New task is required!')
         }
     }
 
@@ -62,11 +69,13 @@ export function Todolist(props: TodoListPropsType) {
                 <h3>{props.title}</h3>
                 <div>
                     <input
+                        className={error ? classes.error : ''}
                         value={inputValue}
                         onChange={onChangeInputHandler}
                         onKeyDown={addTaskOnKeyDownHandler}
                     />
                     <Button name={'+'} callBack={addTaskOnClickHandler}/>
+                    {error && <div className={classes.errorMessage}>{error}</div>}
                 </div>
                 <ul>
                     {props.tasks.map((element, id)=>{
