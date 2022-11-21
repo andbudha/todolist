@@ -46,6 +46,10 @@ function App() {
         setTasks([task,...tasks]);
     }
 
+    //check-box ticking function
+    const tickCheckBox = (elementID: string, eventValueID: boolean) => {
+        setTasks(tasks.map(task=>task.id === elementID ? {...task, isDone: eventValueID} : task));
+    }
 
     return (
         <div className="App">
@@ -55,6 +59,7 @@ function App() {
              removeTask={removeTask}
              filterTasks={filterTasks}
              addTask={addTask}
+             tickCheckBox={tickCheckBox}
          />
         </div>
     );

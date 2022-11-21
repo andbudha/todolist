@@ -9,15 +9,16 @@ export type TaskType = {
     isDone: boolean
 }
 
-type PropsType = {
+type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (taskID: string)=> void
     filterTasks: (filteredTasks: FilterValueType)=> void
     addTask:(newTask: string)=> void
+    tickCheckBox: (elementID: string, eventValueID: boolean)=> void
 }
 
-export function Todolist(props: PropsType) {
+export function Todolist(props: TodoListPropsType) {
     let[inputValue, setInputValue]=useState('');
 
     //input-value-catching function
@@ -48,6 +49,11 @@ export function Todolist(props: PropsType) {
         props.removeTask(elementID);
     }
 
+    //check-box ticking function
+    const onChangeTickCheckBoxHandler = (elementID: string, eventValueID: boolean) => {
+        props.tickCheckBox(elementID,eventValueID);
+    }
+
     return (
         <div className="App">
             <div>
@@ -61,12 +67,18 @@ export function Todolist(props: PropsType) {
                     <Button name={'+'} callBack={addTaskOnClickHandler}/>
                 </div>
                 <ul>
-                    {props.tasks.map((element)=>{
+                    {props.tasks.map((element, id)=>{
                         return(
 
-                            <li key={element.id}>
+                            <li key={id}>
                                 <Button name={'X'} callBack={()=>taskRemoveOnClickHandler(element.id)}/>
-                                <input type="checkbox" checked={element.isDone}/> <span>{element.title}</span>
+                                <span>{element.title}</span>
+                                <input
+                                    type="checkbox"
+                                    checked={element.isDone}
+                                    onChange={
+                                        (event)=>onChangeTickCheckBoxHandler(element.id, event.currentTarget.checked)}
+                                />
                             </li>
                         );
                     })}
