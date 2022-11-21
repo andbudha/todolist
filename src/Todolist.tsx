@@ -35,8 +35,10 @@ export function Todolist(props: TodoListPropsType) {
 
     //onclick input-value-passing function
     const addTaskOnClickHandler = () => {
-        props.addTask(inputValue);
-        setInputValue('');
+        if(inputValue.trim() !== ''){
+            props.addTask(inputValue.trim());
+            setInputValue('');
+        }
     }
 
     //onclick task filtering
