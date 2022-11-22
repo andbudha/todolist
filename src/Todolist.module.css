@@ -11,3 +11,7 @@
     background-color: aquamarine;
     color: black;
 }
+
+.isDone {
+    opacity: 0.5;
+}

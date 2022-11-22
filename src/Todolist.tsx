@@ -94,7 +94,7 @@ export function Todolist(props: TodoListPropsType) {
                     {props.tasks.map((element, id)=>{
                         return(
 
-                            <li key={id}>
+                            <li key={id} className={element.isDone ? classes.isDone : ''}>
                                 <button onClick={()=>taskRemoveOnClickHandler(element.id)}>X</button>
                                 <span>{element.title}</span>
                                 <input
