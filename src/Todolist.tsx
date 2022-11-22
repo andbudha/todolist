@@ -1,6 +1,5 @@
 import React, {KeyboardEvent,ChangeEvent, useState} from "react";
 import {FilterValueType} from "./App";
-import {Button} from "./components/Button";
 import classes from "./Todolist.module.css";
 
 
@@ -74,7 +73,7 @@ export function Todolist(props: TodoListPropsType) {
                         onChange={onChangeInputHandler}
                         onKeyDown={addTaskOnKeyDownHandler}
                     />
-                    <Button name={'+'} callBack={addTaskOnClickHandler}/>
+                    <button onClick={addTaskOnClickHandler}>+</button>
                     {error && <div className={classes.errorMessage}>{error}</div>}
                 </div>
                 <ul>
@@ -82,7 +81,7 @@ export function Todolist(props: TodoListPropsType) {
                         return(
 
                             <li key={id}>
-                                <Button name={'X'} callBack={()=>taskRemoveOnClickHandler(element.id)}/>
+                                <button onClick={()=>taskRemoveOnClickHandler(element.id)}>X</button>
                                 <span>{element.title}</span>
                                 <input
                                     type="checkbox"
@@ -95,9 +94,9 @@ export function Todolist(props: TodoListPropsType) {
                     })}
                 </ul>
                 <div>
-                    <Button name={'All'} callBack={()=>filterTaskOnClickHandler('All')}/>
-                    <Button name={'Active'} callBack={()=>filterTaskOnClickHandler('Active')}/>
-                    <Button name={'Completed'} callBack={()=>filterTaskOnClickHandler('Completed')}/>
+                    <button onClick={()=>filterTaskOnClickHandler('All')}>All</button>
+                    <button onClick={()=>filterTaskOnClickHandler('Active')}>Active</button>
+                    <button onClick={()=>filterTaskOnClickHandler('Completed')}>Completed</button>
                 </div>
             </div>
         </div>

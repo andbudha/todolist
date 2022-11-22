@@ -7,7 +7,7 @@ export type FilterValueType = 'All'|'Completed'|'Active';
 
 function App() {
 
-    const title = 'To be learned!'
+    const title = 'To be learnt!'
 
     let [tasks, setTasks]=useState<Array<TaskType>>([
         { id: v1(), title: "HTML&CSS", isDone: true },
