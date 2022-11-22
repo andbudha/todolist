@@ -19,10 +19,13 @@ type TodoListPropsType = {
 }
 
 export function Todolist(props: TodoListPropsType) {
+
     //input states
     const[inputValue, setInputValue]=useState('');
     const[error, setError]=useState<string|null>(null);
 
+    //active filter state
+    const[activeFilter, setActiveFilter]=useState('All');
 
     //input-value-catching function
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,12 +50,23 @@ export function Todolist(props: TodoListPropsType) {
         }
     }
 
-    //onclick task filtering
-    const filterTaskOnClickHandler = (buttonName: FilterValueType) => {
-        props.filterTasks(buttonName);
+    //onclick task filtering functions
+    const filterAllTaskOnClickHandler = () => {
+        props.filterTasks('All');
+        setActiveFilter('All');
     }
 
-    //onclick task removing
+    const filterActiveTaskOnClickHandler = () => {
+        props.filterTasks('Active');
+        setActiveFilter('Active');
+    }
+
+    const filterCompletedTaskOnClickHandler = () => {
+        props.filterTasks('Completed');
+        setActiveFilter('Completed');
+    }
+
+    //onclick task removing function
     const taskRemoveOnClickHandler = (elementID: string) => {
         props.removeTask(elementID);
     }
@@ -94,9 +108,9 @@ export function Todolist(props: TodoListPropsType) {
                     })}
                 </ul>
                 <div>
-                    <button onClick={()=>filterTaskOnClickHandler('All')}>All</button>
-                    <button onClick={()=>filterTaskOnClickHandler('Active')}>Active</button>
-                    <button onClick={()=>filterTaskOnClickHandler('Completed')}>Completed</button>
+                    <button className={activeFilter === 'All' ? classes.activeFilter : ''} onClick={filterAllTaskOnClickHandler}>All</button>
+                    <button className={activeFilter === 'Active' ? classes.activeFilter : ''} onClick={filterActiveTaskOnClickHandler}>Active</button>
+                    <button className={activeFilter === 'Completed' ? classes.activeFilter : ''} onClick={filterCompletedTaskOnClickHandler}>Completed</button>
                 </div>
             </div>
         </div>
