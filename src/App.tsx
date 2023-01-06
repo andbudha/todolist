@@ -14,70 +14,73 @@ type TodoListsType = {
 
 function App() {
 
+    let todolistID1 = v1()
+    let todolistID2 = v1()
 
-    let [toDoLists, setToDoLists] = useState<Array<TodoListsType>>(
-        [
-            {id: v1(), title: 'What to learn', filter: 'All'},
-            {id: v1(), title: 'What to buy', filter: 'All'},
+    let [toDoLists, setToDoLists] = useState<Array<TodoListsType>>([
+        {id: todolistID1, title: 'What to learn', filter: 'All'},
+        {id: todolistID2, title: 'What to buy', filter: 'All'},
+    ])
+
+    let [tasks, setTasks] = useState({
+        [todolistID1]: [
+            {id: v1(), title: 'HTML&CSS', isDone: true},
+            {id: v1(), title: 'JS', isDone: true},
+            {id: v1(), title: 'ReactJS', isDone: false},
+
+        ],
+        [todolistID2]: [
+            {id: v1(), title: 'Rest API', isDone: true},
+            {id: v1(), title: 'GraphQL', isDone: false},
         ]
-    )
-
-
-    let [tasks, setTasks] = useState<Array<TaskType>>([
-        {id: v1(), title: "HTML&CSS", isDone: true},
-        {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "ReactJS", isDone: false},
-        {id: v1(), title: "ReactNative", isDone: false}
-    ]);
-
-    //filter-state
-    let [filter, setFilter] = useState<FilterValueType>('All');
+    })
 
     //task-removing function
     const removeTask = (taskID: string) => {
-        setTasks(tasks.filter(element => element.id !== taskID));
+
     }
 
     //task-filtering function
     const filterTasks = (filteredTasks: FilterValueType) => {
-        setFilter(filteredTasks);
-    }
 
-    //filter-conditioning
-    let filtered = tasks;
-
-    if (filter === 'Completed') {
-        filtered = tasks.filter(element => element.isDone);
-    }
-
-    if (filter === 'Active') {
-        filtered = tasks.filter(element => !element.isDone);
     }
 
     //task-adding function
     const addTask = (newTask: string) => {
-        let task = {id: v1(), title: newTask, isDone: false};
-        setTasks([task, ...tasks]);
+
     }
 
     //check-box ticking function
     const tickCheckBox = (elementID: string, eventValueID: boolean) => {
-        setTasks(tasks.map(task => task.id === elementID ? {...task, isDone: eventValueID} : task));
+
     }
 
     return (
         <div className="App">
 
             {toDoLists.map(list=>{
+
+                //filter-conditioning
+                let filtered = tasks[list.id];
+
+                if (list.filter === 'Completed') {
+                    filtered = tasks[list.id].filter(element => element.isDone);
+                }
+
+                if (list.filter === 'Active') {
+                    filtered = tasks[list.id].filter(element => !element.isDone);
+                }
+
                 return(
                     <Todolist
                         key={list.id}
+                        todolistID={list.id}
                         title={list.title}
-                        tasks={filtered}
                         removeTask={removeTask}
                         filterTasks={filterTasks}
                         addTask={addTask}
                         tickCheckBox={tickCheckBox}
+                        tasks={filtered}
                     />
                 );
             })}
