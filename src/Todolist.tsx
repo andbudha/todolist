@@ -16,7 +16,7 @@ type TodoListPropsType = {
     removeTask: (todolistID: string, taskID: string)=> void
     filterTasks: (todolistID: string, filteredTasks: FilterValueType)=> void
     addTask:(todolistID: string,newTask: string)=> void
-    tickCheckBox: (elementID: string, eventValueID: boolean)=> void
+    tickCheckBox: (todolistID: string,taskID: string, checkBoxStatus: boolean)=> void
 }
 
 export function Todolist(props: TodoListPropsType) {
@@ -73,8 +73,8 @@ export function Todolist(props: TodoListPropsType) {
     }
 
     //check-box ticking function
-    const onChangeTickCheckBoxHandler = (elementID: string, eventValueID: boolean) => {
-        props.tickCheckBox(elementID,eventValueID);
+    const onChangeTickCheckBoxHandler = (taskID: string, checkBoxStatus: boolean) => {
+        props.tickCheckBox(props.todolistID,taskID,checkBoxStatus);
     }
 
     return (

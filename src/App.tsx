@@ -53,8 +53,8 @@ function App() {
     }
 
     //check-box ticking function
-    const tickCheckBox = (elementID: string, eventValueID: boolean) => {
-
+    const tickCheckBox = (todolistID: string,taskID: string, checkBoxStatus: boolean) => {
+        setTasks({...tasks, [todolistID]:[...tasks[todolistID].map(task=>task.id === taskID ? {...task, isDone:checkBoxStatus} : task)]})
     }
 
     return (
