@@ -5,7 +5,7 @@ import {v1} from "uuid";
 
 export type FilterValueType = 'All' | 'Completed' | 'Active';
 
-type TodolistsType = {
+type TodoListsType = {
     id: string,
     title: string,
     filter: FilterValueType
@@ -15,7 +15,7 @@ type TodolistsType = {
 function App() {
 
 
-    let [todolists, setTodolists] = useState<Array<TodolistsType>>(
+    let [toDoLists, setToDoLists] = useState<Array<TodoListsType>>(
         [
             {id: v1(), title: 'What to learn', filter: 'All'},
             {id: v1(), title: 'What to buy', filter: 'All'},
@@ -68,7 +68,7 @@ function App() {
     return (
         <div className="App">
 
-            {todolists.map(list=>{
+            {toDoLists.map(list=>{
                 return(
                     <Todolist
                         key={list.id}
