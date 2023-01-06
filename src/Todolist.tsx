@@ -15,7 +15,7 @@ type TodoListPropsType = {
     tasks: Array<TaskType>
     removeTask: (todolistID: string, taskID: string)=> void
     filterTasks: (todolistID: string, filteredTasks: FilterValueType)=> void
-    addTask:(newTask: string)=> void
+    addTask:(todolistID: string,newTask: string)=> void
     tickCheckBox: (elementID: string, eventValueID: boolean)=> void
 }
 
@@ -36,7 +36,7 @@ export function Todolist(props: TodoListPropsType) {
     const addTaskOnKeyDownHandler = (input: KeyboardEvent<HTMLInputElement>) => {
        setError(null)
         if(input.key === 'Enter'){
-            props.addTask(inputValue);
+            props.addTask(props.todolistID,inputValue);
             setInputValue('');
         }
     }
@@ -44,7 +44,7 @@ export function Todolist(props: TodoListPropsType) {
     //onclick input-value-passing function
     const addTaskOnClickHandler = () => {
         if(inputValue.trim() !== ''){
-            props.addTask(inputValue.trim());
+            props.addTask(props.todolistID,inputValue.trim());
             setInputValue('');
         } else {
             setError('New task is required!')

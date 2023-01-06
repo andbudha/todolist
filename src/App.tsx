@@ -46,7 +46,9 @@ function App() {
     }
 
     //task-adding function
-    const addTask = (newTask: string) => {
+    const addTask = (todolistID: string, newToDo: string) => {
+        const newTask = {id: v1(), title: newToDo, isDone: false};
+        setTasks({...tasks, [todolistID]:[newTask,...tasks[todolistID]]})
 
     }
 
