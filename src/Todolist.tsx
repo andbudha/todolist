@@ -14,7 +14,7 @@ type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (todolistID: string, taskID: string)=> void
-    filterTasks: (filteredTasks: FilterValueType)=> void
+    filterTasks: (todolistID: string, filteredTasks: FilterValueType)=> void
     addTask:(newTask: string)=> void
     tickCheckBox: (elementID: string, eventValueID: boolean)=> void
 }
@@ -53,17 +53,17 @@ export function Todolist(props: TodoListPropsType) {
 
     //onclick task filtering functions
     const filterAllTaskOnClickHandler = () => {
-        props.filterTasks('All');
+        props.filterTasks(props.todolistID,'All');
         setActiveFilter('All');
     }
 
     const filterActiveTaskOnClickHandler = () => {
-        props.filterTasks('Active');
+        props.filterTasks(props.todolistID,'Active');
         setActiveFilter('Active');
     }
 
     const filterCompletedTaskOnClickHandler = () => {
-        props.filterTasks('Completed');
+        props.filterTasks(props.todolistID,'Completed');
         setActiveFilter('Completed');
     }
 

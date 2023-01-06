@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TaskType, Todolist} from "./Todolist";
+import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 
 export type FilterValueType = 'All' | 'Completed' | 'Active';
@@ -41,8 +41,8 @@ function App() {
     }
 
     //task-filtering function
-    const filterTasks = (filteredTasks: FilterValueType) => {
-
+    const filterTasks = (todolistID: string, filteredTasks: FilterValueType) => {
+        setToDoLists(toDoLists.map(list=>list.id===todolistID ? {...list, filter: filteredTasks} : list));
     }
 
     //task-adding function
