@@ -13,7 +13,7 @@ type TodoListPropsType = {
     todolistID: string
     title: string
     tasks: Array<TaskType>
-    removeTask: (taskID: string)=> void
+    removeTask: (todolistID: string, taskID: string)=> void
     filterTasks: (filteredTasks: FilterValueType)=> void
     addTask:(newTask: string)=> void
     tickCheckBox: (elementID: string, eventValueID: boolean)=> void
@@ -69,7 +69,7 @@ export function Todolist(props: TodoListPropsType) {
 
     //onclick task removing function
     const taskRemoveOnClickHandler = (elementID: string) => {
-        props.removeTask(elementID);
+        props.removeTask(props.todolistID,elementID);
     }
 
     //check-box ticking function

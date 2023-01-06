@@ -36,8 +36,8 @@ function App() {
     })
 
     //task-removing function
-    const removeTask = (taskID: string) => {
-
+    const removeTask = (todolistID: string, taskID: string) => {
+        setTasks({...tasks, [todolistID]:[...tasks[todolistID].filter(task=>task.id !== taskID)]})
     }
 
     //task-filtering function
