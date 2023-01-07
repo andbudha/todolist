@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {FilterValueType} from "./App";
 import classes from "./Todolist.module.css";
 import {Input} from "./components/Input/Input";
+import {TitleEditor} from "./components/TitleEditor/TitleEditor";
 
 
 export type TaskType = {
@@ -19,6 +20,7 @@ type TodoListPropsType = {
     addTask:(todolistID: string,newTask: string)=> void
     tickCheckBox: (todolistID: string,taskID: string, checkBoxStatus: boolean)=> void
     removeToDoList:(todolistID: string)=>void
+    alterTaskTitle:(todolistID: string, taskID: string, newTitle: string)=>void
 }
 
 export function Todolist(props: TodoListPropsType) {
@@ -62,30 +64,38 @@ export function Todolist(props: TodoListPropsType) {
 
     //onclick todolist removing function
     const removeToDoListHandler = () => {
-      props.removeToDoList(props.todolistID);
+        props.removeToDoList(props.todolistID);
     }
+
 
     return (
         <div className="App">
             <div>
                 <h3>
                     <button onClick={removeToDoListHandler}>X</button>
-                    {props.title}</h3>
+                    <TitleEditor title={props.title} callBack={()=>{}}/></h3>
 
-                    <Input callBack={taskAddingHandler}/>
+                <Input callBack={taskAddingHandler}/>
                 <ul>
                     {props.tasks.map((element, id)=>{
+
+                        //task title changing function
+                        const alterTaskTitleHandler = (newTitle: string) => {
+                            props.alterTaskTitle(props.todolistID, element.id, newTitle);
+                        }
                         return(
 
                             <li key={id} className={element.isDone ? classes.isDone : ''}>
-                                <button onClick={()=>taskRemoveOnClickHandler(element.id)}>X</button>
-                                <span>{element.title}</span>
                                 <input
                                     type="checkbox"
                                     checked={element.isDone}
                                     onChange={
                                         (event)=>onChangeTickCheckBoxHandler(element.id, event.currentTarget.checked)}
                                 />
+
+                                <TitleEditor title={element.title} callBack={alterTaskTitleHandler}/>
+
+                                <button onClick={()=>taskRemoveOnClickHandler(element.id)}>X</button>
                             </li>
                         );
                     })}

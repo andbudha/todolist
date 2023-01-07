@@ -43,7 +43,10 @@ function App() {
         const newID = v1();
         const newList: TodoListsType = {id: newID, title: listTitle, filter: 'All'};
         setToDoLists([newList, ...toDoLists])
-        setTasks({...tasks, [newID]:[]});
+        setTasks({...tasks, [newID]:[
+                {id: v1(), title: 'Rest API-2', isDone: false},
+                {id: v1(), title: 'GraphQL-2', isDone: false}
+            ]});
     }
 
     //list removing function
@@ -74,6 +77,11 @@ function App() {
         setTasks({...tasks, [todolistID]:[...tasks[todolistID].map(task=>task.id === taskID ? {...task, isDone:checkBoxStatus} : task)]})
     }
 
+    //changing task title function
+    const alterTaskTitle = (todolistID: string, taskID: string, newTitle: string) => {
+        setTasks({...tasks, [todolistID]:[...tasks[todolistID].map(task=>task.id === taskID ? {...task, title: newTitle} : task)]})
+    }
+
     return (
         <div className="App">
             <Input callBack={addToDoList}/>
@@ -101,6 +109,7 @@ function App() {
                         tickCheckBox={tickCheckBox}
                         tasks={filtered}
                         removeToDoList={removeToDoList}
+                        alterTaskTitle={alterTaskTitle}
                     />
                 );
             })}
