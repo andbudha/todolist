@@ -26,8 +26,9 @@ export const Input = (props: InputPropsType) => {
 
     //onclick input-value-passing function
     const addTaskOnClickHandler = () => {
-        if(inputValue.trim() !== ''){
-            props.callBack(inputValue.trim());
+        const newTitle = inputValue.trim();
+        if(newTitle !== ''){
+            props.callBack(newTitle);
             setInputValue('');
         } else {
             setError('New task is required!')

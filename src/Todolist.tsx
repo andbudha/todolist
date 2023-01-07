@@ -21,6 +21,7 @@ type TodoListPropsType = {
     tickCheckBox: (todolistID: string,taskID: string, checkBoxStatus: boolean)=> void
     removeToDoList:(todolistID: string)=>void
     alterTaskTitle:(todolistID: string, taskID: string, newTitle: string)=>void
+    alterToDoListTitle:(todolistID: string, newTitle: string)=>void
 }
 
 export function Todolist(props: TodoListPropsType) {
@@ -67,13 +68,16 @@ export function Todolist(props: TodoListPropsType) {
         props.removeToDoList(props.todolistID);
     }
 
-
+    //changing todolist title function
+    const alterToDoListTitleHandler = (newTitle: string) => {
+        props.alterToDoListTitle(props.todolistID, newTitle);
+    }
     return (
         <div className="App">
             <div>
                 <h3>
                     <button onClick={removeToDoListHandler}>X</button>
-                    <TitleEditor title={props.title} callBack={()=>{}}/></h3>
+                    <TitleEditor title={props.title} callBack={alterToDoListTitleHandler}/></h3>
 
                 <Input callBack={taskAddingHandler}/>
                 <ul>
