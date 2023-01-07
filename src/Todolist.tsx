@@ -17,6 +17,7 @@ type TodoListPropsType = {
     filterTasks: (todolistID: string, filteredTasks: FilterValueType)=> void
     addTask:(todolistID: string,newTask: string)=> void
     tickCheckBox: (todolistID: string,taskID: string, checkBoxStatus: boolean)=> void
+    removeToDoList:(todolistID: string)=>void
 }
 
 export function Todolist(props: TodoListPropsType) {
@@ -77,10 +78,17 @@ export function Todolist(props: TodoListPropsType) {
         props.tickCheckBox(props.todolistID,taskID,checkBoxStatus);
     }
 
+    //onclick todolist removing function
+    const removeToDoListHandler = () => {
+      props.removeToDoList(props.todolistID);
+    }
+
     return (
         <div className="App">
             <div>
-                <h3>{props.title}</h3>
+                <h3>
+                    <button onClick={removeToDoListHandler}>X</button>
+                    {props.title}</h3>
                 <div>
                     <input
                         className={error ? classes.error : ''}

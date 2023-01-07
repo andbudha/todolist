@@ -22,6 +22,9 @@ function App() {
         {id: todolistID2, title: 'What to buy', filter: 'All'},
     ])
 
+
+
+
     let [tasks, setTasks] = useState({
         [todolistID1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -34,6 +37,14 @@ function App() {
             {id: v1(), title: 'GraphQL', isDone: false},
         ]
     })
+
+    console.log(tasks)
+
+    //list removing function
+    const removeToDoList = (todolistID: string) => {
+        setToDoLists([...toDoLists.filter(list=>list.id !== todolistID)])
+        delete tasks[todolistID];
+    }
 
     //task-removing function
     const removeTask = (todolistID: string, taskID: string) => {
@@ -83,6 +94,7 @@ function App() {
                         addTask={addTask}
                         tickCheckBox={tickCheckBox}
                         tasks={filtered}
+                        removeToDoList={removeToDoList}
                     />
                 );
             })}
