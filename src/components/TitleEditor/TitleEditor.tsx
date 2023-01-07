@@ -11,10 +11,10 @@ export const TitleEditor = (props: TitleEditorPropsType) => {
 
     const setEditorHandler = () => {
       setEditor(!editor);
+        props.callBack(inputValue);
     }
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.currentTarget.value);
-        props.callBack(inputValue);
     }
 
     return (
