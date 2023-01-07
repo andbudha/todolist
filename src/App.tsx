@@ -38,7 +38,6 @@ function App() {
         ]
     })
 
-    console.log(tasks)
 
     //list removing function
     const removeToDoList = (todolistID: string) => {

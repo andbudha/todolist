@@ -1,6 +1,7 @@
 import React, {KeyboardEvent,ChangeEvent, useState} from "react";
 import {FilterValueType} from "./App";
 import classes from "./Todolist.module.css";
+import {Input} from "./components/Input/Input";
 
 
 export type TaskType = {
@@ -22,35 +23,11 @@ type TodoListPropsType = {
 
 export function Todolist(props: TodoListPropsType) {
 
-    //input states
-    const[inputValue, setInputValue]=useState('');
-    const[error, setError]=useState<string|null>(null);
+
 
     //active filter state
     const[activeFilter, setActiveFilter]=useState('All');
 
-    //input-value-catching function
-    const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.currentTarget.value);
-    }
-    //onkeydown input-value-passing function
-    const addTaskOnKeyDownHandler = (input: KeyboardEvent<HTMLInputElement>) => {
-       setError(null)
-        if(input.key === 'Enter'){
-            props.addTask(props.todolistID,inputValue);
-            setInputValue('');
-        }
-    }
-
-    //onclick input-value-passing function
-    const addTaskOnClickHandler = () => {
-        if(inputValue.trim() !== ''){
-            props.addTask(props.todolistID,inputValue.trim());
-            setInputValue('');
-        } else {
-            setError('New task is required!')
-        }
-    }
 
     //onclick task filtering functions
     const filterAllTaskOnClickHandler = () => {
@@ -89,16 +66,8 @@ export function Todolist(props: TodoListPropsType) {
                 <h3>
                     <button onClick={removeToDoListHandler}>X</button>
                     {props.title}</h3>
-                <div>
-                    <input
-                        className={error ? classes.error : ''}
-                        value={inputValue}
-                        onChange={onChangeInputHandler}
-                        onKeyDown={addTaskOnKeyDownHandler}
-                    />
-                    <button onClick={addTaskOnClickHandler}>+</button>
-                    {error && <div className={classes.errorMessage}>{error}</div>}
-                </div>
+
+                    <Input callBack={()=>{}}/>
                 <ul>
                     {props.tasks.map((element, id)=>{
                         return(
