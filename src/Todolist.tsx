@@ -1,4 +1,4 @@
-import React, {KeyboardEvent,ChangeEvent, useState} from "react";
+import React, {useState} from "react";
 import {FilterValueType} from "./App";
 import classes from "./Todolist.module.css";
 import {Input} from "./components/Input/Input";
@@ -45,14 +45,19 @@ export function Todolist(props: TodoListPropsType) {
         setActiveFilter('Completed');
     }
 
+    //check-box ticking function
+    const onChangeTickCheckBoxHandler = (taskID: string, checkBoxStatus: boolean) => {
+        props.tickCheckBox(props.todolistID,taskID,checkBoxStatus);
+    }
+
     //onclick task removing function
     const taskRemoveOnClickHandler = (elementID: string) => {
         props.removeTask(props.todolistID,elementID);
     }
 
-    //check-box ticking function
-    const onChangeTickCheckBoxHandler = (taskID: string, checkBoxStatus: boolean) => {
-        props.tickCheckBox(props.todolistID,taskID,checkBoxStatus);
+    //task adding handler
+    const taskAddingHandler = (inputValue: string) => {
+        props.addTask(props.todolistID, inputValue);
     }
 
     //onclick todolist removing function
@@ -67,7 +72,7 @@ export function Todolist(props: TodoListPropsType) {
                     <button onClick={removeToDoListHandler}>X</button>
                     {props.title}</h3>
 
-                    <Input callBack={()=>{}}/>
+                    <Input callBack={taskAddingHandler}/>
                 <ul>
                     {props.tasks.map((element, id)=>{
                         return(
