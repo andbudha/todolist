@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {FilterValueType} from "./App";
+import {FilterValueType} from "../../App";
 import classes from "./Todolist.module.css";
-import {Input} from "./components/Input/Input";
-import {TitleEditor} from "./components/TitleEditor/TitleEditor";
+import {Input} from "../Input/Input";
+import {TitleEditor} from "../TitleEditor/TitleEditor";
 
 
 export type TaskType = {

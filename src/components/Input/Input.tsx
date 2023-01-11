@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import classes from "../../Todolist.module.css";
+import classes from "./Input.module.css";
 
 type InputPropsType = {
     callBack:(inputValue: string)=>void
@@ -43,6 +43,7 @@ export const Input = (props: InputPropsType) => {
                 onKeyDown={addTaskOnKeyDownHandler}
             />
             <button onClick={addTaskOnClickHandler}>+</button>
+
             {error && <div className={classes.errorMessage}>{error}</div>}
         </div>
     );
