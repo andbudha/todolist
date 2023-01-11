@@ -3,6 +3,8 @@ import {FilterValuesType} from '../../App';
 import {AddItemForm} from '../AddItemForm/AddItemForm';
 import {EditableSpan} from '../EditableSpan/EditableSpan';
 import './Todolist.css'
+import Button from '@mui/material/Button';
+
 
 export type TaskType = {
     id: string
@@ -42,7 +44,12 @@ export function Todolist(props: PropsType) {
 
     return <div>
         <h3> <EditableSpan value={props.title} onChange={changeTodolistTitle} />
-            <button onClick={removeTodolist}>x</button>
+            <Button
+                variant="contained"
+                onClick={removeTodolist}
+                className={'btn'}
+            >x</Button>
+
         </h3>
         <AddItemForm addItem={addTask}/>
         <ul>
@@ -57,16 +64,23 @@ export function Todolist(props: PropsType) {
                         props.changeTaskTitle(t.id, newValue, props.id);
                     }
 
-
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
+                        <Button
+                            variant="contained"
+                            onClick={onClickHandler}
+                            className={'btn'}
+                        >x</Button>
                         <EditableSpan value={t.title} onChange={onTitleChangeHandler} />
-                        <button onClick={onClickHandler}>x</button>
+                        <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
                     </li>
                 })
             }
         </ul>
         <div>
+            <Button variant="contained" color="success">All</Button>
+            <Button color="secondary">Active</Button>
+            <Button variant="outlined" color="error">Completed</Button>
+
             <button className={props.filter === 'all' ? "active-filter" : ""}
                     onClick={onAllClickHandler}>All
             </button>
