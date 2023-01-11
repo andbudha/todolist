@@ -1,4 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import './AddItemForm.css'
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -24,7 +25,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
-        if (e.charCode === 13) {
+        if (e.key === 'Enter') {
             addItem();
         }
     }
@@ -32,7 +33,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
     return <div>
         <input value={title}
                onChange={onChangeHandler}
-               onKeyPress={onKeyPressHandler}
+               onKeyDown={onKeyPressHandler}
                className={error ? "error" : ""}
         />
         <button onClick={addItem}>+</button>

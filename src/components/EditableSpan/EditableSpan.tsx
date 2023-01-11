@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
+import  './EditableSpan.css'
 
 type EditableSpanPropsType = {
     value: string

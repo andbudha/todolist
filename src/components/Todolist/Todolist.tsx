@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
-import {FilterValuesType} from './App';
-import {AddItemForm} from './AddItemForm';
-import {EditableSpan} from './EditableSpan';
+import {FilterValuesType} from '../../App';
+import {AddItemForm} from '../AddItemForm/AddItemForm';
+import {EditableSpan} from '../EditableSpan/EditableSpan';
+import './Todolist.css'
 
 export type TaskType = {
     id: string
